@@ -60,16 +60,16 @@ public class UserService {
             addressRepository.clearDefaultByUserId(userId);
         }
 
-        Address address = Address.builder()
-                .user(user)
-                .name(request.getName())
-                .recipient(request.getRecipient())
-                .phone(request.getPhone())
-                .zipCode(request.getZipCode())
-                .address(request.getAddress())
-                .addressDetail(request.getAddressDetail())
-                .isDefault(request.isDefault())
-                .build();
+        Address address = Address.of(
+                user,
+                request.getName(),
+                request.getRecipient(),
+                request.getPhone(),
+                request.getZipCode(),
+                request.getAddress(),
+                request.getAddressDetail(),
+                request.isDefault()
+        );
 
         addressRepository.save(address);
         return AddressResponse.from(address);

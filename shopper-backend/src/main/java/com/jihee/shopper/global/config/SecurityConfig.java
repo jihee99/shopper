@@ -71,11 +71,11 @@ public class SecurityConfig {
             )
 
             // OAuth2 소셜 로그인
-            .oauth2Login(oauth2 -> oauth2
-                .userInfoEndpoint(userInfo ->
-                    userInfo.userService(customOAuth2UserService))
-                .successHandler(oauth2SuccessHandler)
-            )
+//            .oauth2Login(oauth2 -> oauth2
+//                .userInfoEndpoint(userInfo ->
+//                    userInfo.userService(customOAuth2UserService))
+//                .successHandler(oauth2SuccessHandler)
+//            )
 
             // 인증 실패 / 권한 없음 → JSON 응답
             .exceptionHandling(ex -> ex
