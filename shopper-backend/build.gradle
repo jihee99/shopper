@@ -1,0 +1,82 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '4.0.2'
+    id 'io.spring.dependency-management' version '1.1.7'
+}
+
+group = 'com.jihee'
+version = '0.0.1-SNAPSHOT'
+description = 'shopper-backend'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // ── Web ─────────────────────────────────────────────────────────────
+    implementation 'org.springframework.boot:spring-boot-starter-webmvc'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+    // ── Security ─────────────────────────────────────────────────────────
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+
+    // ── JPA & Database ───────────────────────────────────────────────────
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    runtimeOnly 'org.postgresql:postgresql'   // Supabase (PostgreSQL)
+
+    // ── Redis ────────────────────────────────────────────────────────────
+    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+
+    // ── JWT (ADR-01-002: jjwt 0.12.6) ───────────────────────────────────
+    implementation 'io.jsonwebtoken:jjwt-api:0.12.6'
+    runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.12.6'
+    runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.12.6'
+
+    // ── QueryDSL (ADR-01-003: 5.1.0 + jakarta classifier) ───────────────
+    implementation 'com.querydsl:querydsl-jpa:5.1.0:jakarta'
+    annotationProcessor 'com.querydsl:querydsl-apt:5.1.0:jakarta'
+    annotationProcessor 'jakarta.persistence:jakarta.persistence-api'
+    annotationProcessor 'jakarta.annotation:jakarta.annotation-api'
+
+    // ── AWS S3 (SDK v2 - Spring Boot 버전 독립적) ─────────────────────────
+    implementation platform('software.amazon.awssdk:bom:2.29.50')
+    implementation 'software.amazon.awssdk:s3'
+
+    // ── Lombok ───────────────────────────────────────────────────────────
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+
+    // ── Dev Tools ────────────────────────────────────────────────────────
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+
+    // ── Test ─────────────────────────────────────────────────────────────
+    testImplementation 'org.springframework.boot:spring-boot-starter-webmvc-test'
+    testImplementation 'org.springframework.security:spring-security-test'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+// ── QueryDSL Q클래스 생성 경로 (ADR-01-003) ──────────────────────────────
+sourceSets {
+    main.java.srcDirs += 'src/main/generated'
+}
+
+clean {
+    delete file('src/main/generated')
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}

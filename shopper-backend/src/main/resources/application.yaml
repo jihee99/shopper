@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: shopper-backend
+
+  # ── JPA 공통 설정 ────────────────────────────────────────────────────────
+  jpa:
+    open-in-view: false               # OSIV 비활성화 (성능, 트랜잭션 경계 명확화)
+    properties:
+      hibernate:
+        default_batch_fetch_size: 100 # N+1 방지용 배치 사이즈
+        format_sql: true
+
+  # ── 파일 업로드 제한 ──────────────────────────────────────────────────────
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 50MB
+
+# ── 서버 포트 ────────────────────────────────────────────────────────────────
+server:
+  port: 8080
