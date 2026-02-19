@@ -416,7 +416,7 @@ JWT를 담아 반환할 수 없다. SPA 프론트엔드에 JWT를 안전하게 �
    → CustomOAuth2UserService에서 사용자 처리
 
 3. JWT 발급 후 프론트엔드로 Redirect:
-   http://localhost:3000/oauth2/callback
+   http://localhost:5173/oauth2/callback
      ?accessToken={accessToken}
      &refreshToken={refreshToken}
 

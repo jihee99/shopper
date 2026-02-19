@@ -19,7 +19,7 @@ import java.time.Duration;
  * OAuth2 로그인 성공 후 JWT를 발급하고 프론트엔드로 Redirect한다 (ADR-02-007).
  *
  * <p>Redirect URL 예시:
- * <pre>http://localhost:3000/oauth2/callback?accessToken=xxx&refreshToken=yyy</pre>
+ * <pre>http://localhost:5173/oauth2/callback?accessToken=xxx&refreshToken=yyy</pre>
  *
  * <p>프론트엔드(OAuthCallback.tsx)에서 URL 파싱 후 즉시 replaceState로 URL을 정리해야 한다.
  */
