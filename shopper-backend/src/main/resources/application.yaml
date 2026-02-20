@@ -10,11 +10,11 @@ spring:
         default_batch_fetch_size: 100 # N+1 방지용 배치 사이즈
         format_sql: true
 
-  # ── 파일 업로드 제한 ──────────────────────────────────────────────────────
+  # ── 파일 업로드 제한 (ADR-03-015) ─────────────────────────────────────────
   servlet:
     multipart:
-      max-file-size: 10MB
-      max-request-size: 50MB
+      max-file-size: 5MB       # 단일 파일 최대 5MB
+      max-request-size: 10MB   # 전체 요청 최대 10MB (여러 파일 대비)
 
 # ── 서버 포트 ────────────────────────────────────────────────────────────────
 server:
