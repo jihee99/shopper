@@ -5,11 +5,13 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * 상품 등록/수정 요청 DTO.
  */
 @Getter
+@Setter
 @NoArgsConstructor
 public class ProductRequest {
 

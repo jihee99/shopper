@@ -1,0 +1,42 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://aws-1-ap-southeast-2.pooler.supabase.com:5432/postgres?sslmode=require
+    username: postgres.rfhqlpjxaozvcktpzdam
+    driver-class-name: org.postgresql.Driver
+    password: supa@admin1234
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+        format_sql: true
+    show-sql: false
+
+  data:
+    redis:
+      host: localhost
+      port: 6379
+
+jwt:
+  secret: testsecrettestsecrettestsecrettestsecrettestsecrettestsecret
+  access-token-expiry: 900000  # 15분
+  refresh-token-expiry: 604800000  # 7일
+
+app:
+  frontend-url: http://localhost:5173
+
+cloud:
+  aws:
+    credentials:
+      access-key: test-access-key
+      secret-key: test-secret-key
+    region:
+      static: ap-northeast-2
+    s3:
+      bucket: test-bucket
+
+logging:
+  level:
+    com.jihee.shopper: DEBUG

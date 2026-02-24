@@ -1,9 +1,11 @@
 package com.jihee.shopper.domain.user.dto;
 
 import jakarta.validation.constraints.NotBlank;
+import lombok.Builder;
 import lombok.Getter;
 
 @Getter
+@Builder
 public class AddressRequest {
 
     @NotBlank(message = "배송지명은 필수입니다")

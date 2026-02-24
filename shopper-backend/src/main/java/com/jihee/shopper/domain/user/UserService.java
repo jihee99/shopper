@@ -1,5 +1,6 @@
 package com.jihee.shopper.domain.user;
 
+import com.jihee.shopper.domain.order.OrderRepository;
 import com.jihee.shopper.domain.user.dto.AddressRequest;
 import com.jihee.shopper.domain.user.dto.AddressResponse;
 import com.jihee.shopper.domain.user.dto.UserResponse;
@@ -26,6 +27,7 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final AddressRepository addressRepository;
+    private final OrderRepository orderRepository;
 
     // ── 내 정보 ────────────────────────────────────────────────────────────────
 
@@ -79,6 +81,13 @@ public class UserService {
     public void deleteAddress(Long userId, Long addressId) {
         Address address = addressRepository.findByIdAndUserId(addressId, userId)
                 .orElseThrow(() -> new CustomException(ErrorCode.ADDRESS_NOT_FOUND));
+
+        // 주문에서 사용 중인지 확인 (ADR-04-006)
+        long orderCount = orderRepository.countByAddressId(addressId);
+        if (orderCount > 0) {
+            throw new CustomException(ErrorCode.ADDRESS_IN_USE);
+        }
+
         addressRepository.delete(address);
     }
 
