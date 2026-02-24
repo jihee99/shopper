@@ -9,7 +9,7 @@ import com.jihee.shopper.domain.product.entity.ProductImage;
 import com.jihee.shopper.domain.product.entity.ProductStatus;
 import com.jihee.shopper.global.exception.CustomException;
 import com.jihee.shopper.global.exception.ErrorCode;
-import com.jihee.shopper.infra.s3.S3Uploader;
+//import com.jihee.shopper.infra.s3.S3Uploader;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -33,7 +33,7 @@ public class ProductService {
     private final ProductRepository productRepository;
     private final CategoryRepository categoryRepository;
     private final ProductImageRepository productImageRepository;
-    private final S3Uploader s3Uploader;
+//    private final S3Uploader s3Uploader;
 
     // ── 공개 조회 API ───────────────────────────────────────────────────────
 
@@ -139,7 +139,8 @@ public class ProductService {
         }
 
         // S3 업로드
-        String imageUrl = s3Uploader.uploadImage(file);
+        String imageUrl = "";
+//        String imageUrl = s3Uploader.uploadImage(file);
 
         // 첫 이미지는 자동으로 메인 이미지 (ADR-03-013)
         boolean shouldBeMain = isMain;
@@ -178,7 +179,7 @@ public class ProductService {
         }
 
         // S3 삭제 먼저 (실패 시 트랜잭션 롤백)
-        s3Uploader.deleteImage(image.getUrl());
+//        s3Uploader.deleteImage(image.getUrl());
 
         // DB 삭제
         productImageRepository.delete(image);
